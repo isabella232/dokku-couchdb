@@ -112,9 +112,12 @@ dokku couchdb:link lolipop playground
 # and the following will be set on the linked application by default
 #
 #   COUCHDB_URL=couchdb://lolipop:SOME_PASSWORD@dokku-couchdb-lolipop:5984/lolipop
+#   JDBC_COUCHDB_URL=couchdb://dokku-couchdb-lolipop:5984/lolipop?user=lolipop&password=SOME_PASSWORD
 #
 # NOTE: the host exposed here only works internally in docker containers. If
 # you want your container to be reachable from outside, you should use `expose`.
+# As well, we shall omit the JDBC url from all following examples for brevity.
+# As well, we shall omit the JDBC url from all following examples for brevity.
 
 # another service can be linked to your app
 dokku couchdb:link other_service playground
