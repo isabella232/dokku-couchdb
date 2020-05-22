@@ -15,9 +15,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup Python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.7.0
+          python-version: 3.7.x
       - name: Setup tests
         run: DOKKU_VERSION=${{ matrix.dokku-version }} make setup
       - name: Increase vm.max_map_count
