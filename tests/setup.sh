@@ -13,11 +13,13 @@ wget https://raw.githubusercontent.com/dokku/dokku/master/bootstrap.sh
 if [[ "$DOKKU_VERSION" == "master" ]]; then
   sudo TRACE=$TRACE bash bootstrap.sh || {
     which docker || true
+    dpkg -S "$(which docker)"
     sudo apt install -y dokku
   }
 else
   sudo DOKKU_TAG="$DOKKU_VERSION" TRACE=$TRACE bash bootstrap.sh || {
     which docker || true
+    dpkg -S "$(which docker)"
     sudo apt install -y dokku
   }
 fi
