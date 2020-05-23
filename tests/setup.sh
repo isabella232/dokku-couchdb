@@ -14,16 +14,20 @@ if [[ "$DOKKU_VERSION" == "master" ]]; then
   sudo TRACE=$TRACE bash bootstrap.sh || {
     which docker || true
     dpkg -S "$(which docker)"
+    dpkg -l | grep -E "docker|moby"
     sudo apt install -y dokku
   }
 else
   sudo DOKKU_TAG="$DOKKU_VERSION" TRACE=$TRACE bash bootstrap.sh || {
     which docker || true
     dpkg -S "$(which docker)"
+    dpkg -l | grep -E "docker|moby"
     sudo apt install -y dokku
   }
 fi
 echo "Dokku version $DOKKU_VERSION"
+dpkg -S "$(which docker)"
+dpkg -l | grep -E "docker|moby"
 
 export DOKKU_LIB_ROOT="/var/lib/dokku"
 export DOKKU_PLUGINS_ROOT="$DOKKU_LIB_ROOT/plugins/available"
