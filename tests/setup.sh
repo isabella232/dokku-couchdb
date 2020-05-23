@@ -11,9 +11,15 @@ sudo curl https://raw.githubusercontent.com/dokku/dokku/master/tests/dhparam.pem
 echo "dokku dokku/skip_key_file boolean true" | sudo debconf-set-selections
 wget https://raw.githubusercontent.com/dokku/dokku/master/bootstrap.sh
 if [[ "$DOKKU_VERSION" == "master" ]]; then
-  sudo TRACE=$TRACE bash bootstrap.sh || sudo apt install -y dokku
+  sudo TRACE=$TRACE bash bootstrap.sh || {
+    which docker || true
+    sudo apt install -y dokku
+  }
 else
-  sudo DOKKU_TAG="$DOKKU_VERSION" TRACE=$TRACE bash bootstrap.sh || sudo apt install -y dokku
+  sudo DOKKU_TAG="$DOKKU_VERSION" TRACE=$TRACE bash bootstrap.sh || {
+    which docker || true
+    sudo apt install -y dokku
+  }
 fi
 echo "Dokku version $DOKKU_VERSION"
 
